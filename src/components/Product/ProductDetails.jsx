@@ -30,7 +30,7 @@ const ProductDetails = () => {
               <div key={index} className="column">
                 <button
                   onClick={() => setSelectedSizeIndex(index)}
-                  className={selectedSizeIndex === index && 'active-btn'}
+                  className={selectedSizeIndex === index ? 'active-btn' : ''}
                 >{size}</button>
               </div>
             ))}
