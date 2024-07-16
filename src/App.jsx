@@ -1,12 +1,8 @@
-import './App.css'
-import ProductDetails from './components/Product/ProductDetails'
+import "./App.css";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
-  return (
-    <>
-      <ProductDetails />
-    </>
-  )
+  return <ProductPage />;
 }
 
-export default App
+export default App;
