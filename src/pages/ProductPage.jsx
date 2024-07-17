@@ -1,4 +1,4 @@
-import ProductDetails from "../components/product/ProductDetails";
+import ProductDetails from "../components/Product/ProductDetails";
 import PageLayout from "./PageLayout";
 
 function ProductPage() {

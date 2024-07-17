@@ -1,28 +1,50 @@
-import "./product.css"
-import { useState } from "react"
+import { useState } from "react";
+import { Column, Image, Row } from "../common";
+import styled from "styled-components";
 
 const ProductImage = ({ productImages, productName }) => {
-    const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-    return (
-        <div className="product-image-container">
-            <div className="product-main-image">
-                <img
-                    src={productImages[selectedImageIndex]}
-                    alt={`${productName} ${selectedImageIndex}`}
-                />
-            </div>
-            <div className="row">
-                {productImages.map((image, index) => (
-                    <div key={index} className="column">
-                        <button onClick={() => setSelectedImageIndex(index)}>
-                            {index}
-                        </button>
-                    </div>
-                ))}
-            </div>
-        </div>
-    )
-}
+  return (
+    <>
+      <Image
+        src={productImages[selectedImageIndex]}
+        alt={`${productName} ${selectedImageIndex}`}
+        width="380px"
+        height="380px"
+      />
+      <ImageSelector>
+        <Row>
+          {productImages.map((image, index) => (
+            <Column key={index}>
+              <Image
+                src={image}
+                alt={`${productName} ${selectedImageIndex}`}
+                onClick={() => setSelectedImageIndex(index)}
+                width="89px"
+                height="89px"
+              />
+              {selectedImageIndex === index ? <UnderLine /> : null}
+            </Column>
+          ))}
+        </Row>
+      </ImageSelector>
+    </>
+  );
+};
 
-export default ProductImage
+const ImageSelector = styled.div`
+  margin: 10px auto;
+
+  img {
+    margin: 0 10px;
+  }
+`;
+
+const UnderLine = styled.hr`
+  width: 40%;
+  border: solid #ed342a 2px;
+  border-radius: 4px;
+`;
+
+export default ProductImage;

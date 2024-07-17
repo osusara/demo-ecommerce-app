@@ -1,20 +1,5 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  text-align: center;
-}
-
-.row {
-  display: flex;
-}
-
-.column {
-  flex-direction: column;
-  margin-left: 2px;
-  margin-right: 2px;
-}
-
-.text-start {
-  text-align: start;
 }
 
