@@ -12,6 +12,8 @@ const NavItemContainer = styled.ul`
 const NavItem = styled.li`
   margin: 0 5px;
   padding: 25px 0;
+  position: relative;
+  color: ${(props) => (props.active ? "#BD9F00" : "#000000")};
 
   & a {
     text-decoration: none;
@@ -21,12 +23,24 @@ const NavItem = styled.li`
   & a:hover {
     color: #ddd;
   }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -16px;
+    background-color: ${(props) => (props.active ? "#BD9F00" : "unset")};
+    width: calc(100% + 32px);
+    height: 8px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
 `;
 
 function NavigationItems() {
   return (
     <NavItemContainer>
-      <NavItem>
+      <NavItem active>
         <a href="#home">Home</a>
       </NavItem>
       <NavItem>
