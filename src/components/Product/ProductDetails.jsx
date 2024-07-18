@@ -48,7 +48,7 @@ const ProductDetails = () => {
         </Column>
         <Column>
           <ProductDetailsContainer>
-            <h1>{product.name}</h1>
+            <ProductName>{product.name}</ProductName>
             <h3>$ {product.price.toFixed(2)}</h3>
             <Paragraph color="#6E6E6E">{product.description}</Paragraph>
 
@@ -116,6 +116,14 @@ const ActionButtons = ({ onAddToCart, onBuyNow }) => (
 
 const ProductContainer = styled(Container)`
   margin: 64px;
+`;
+
+const ProductName = styled.h1`
+  font-family: "Bruno Ace SC", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 48px;
+  line-height: 48px;
 `;
 
 const ProductDetailsContainer = styled(Container)`
