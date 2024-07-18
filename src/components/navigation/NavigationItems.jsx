@@ -1,14 +1,17 @@
 import styled from "styled-components";
 
-const NavBar = styled.ul`
+const NavItemContainer = styled.ul`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   list-style: none;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
 `;
 
 const NavItem = styled.li`
-  margin: 0 1rem;
-  padding: 25px;
+  margin: 0 5px;
+  padding: 25px 0;
 
   & a {
     text-decoration: none;
@@ -20,9 +23,9 @@ const NavItem = styled.li`
   }
 `;
 
-function NavigationBar() {
+function NavigationItems() {
   return (
-    <NavBar>
+    <NavItemContainer>
       <NavItem>
         <a href="#home">Home</a>
       </NavItem>
@@ -38,8 +41,8 @@ function NavigationBar() {
       <NavItem>
         <a href="#collections">Collections</a>
       </NavItem>
-    </NavBar>
+    </NavItemContainer>
   );
 }
 
-export default NavigationBar;
+export default NavigationItems;
