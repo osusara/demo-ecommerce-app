@@ -1,14 +1,19 @@
+import styled from "styled-components";
 import { Column } from "../components/common";
-import NavigationBar from "../components/navigation/NavigationBar";
+import HeaderBar from "../components/navigation/HeaderBar";
+
+const Container = styled(Column)`
+  margin: 0 64px;
+`;
 
 function PageLayout({ children }) {
   return (
-    <Column>
+    <Container>
       <header>
-        <NavigationBar />
+        <HeaderBar />
       </header>
       <main>{children}</main>
-    </Column>
+    </Container>
   );
 }
 
