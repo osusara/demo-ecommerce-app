@@ -1,16 +1,11 @@
 import { useState } from "react";
 import ProductImage from "./ProductImage";
-import {
-  Row,
-  Column,
-  PrimaryButton,
-  SecondaryButton,
-  SmallButton,
-  Paragraph,
-  Container,
-  QtyInput,
-} from "../common";
+import { Row, Column, Paragraph, Container, Heading } from "../common";
 import styled from "styled-components";
+import Cart from "../Cart";
+import ProductSizeSelector from "./ProductSizeSelector";
+import ProductActionButtons from "./ProductActionButtons";
+import ProductQuantityInput from "./ProductQuantityInput";
 
 const product = {
   id: 1,
@@ -25,7 +20,7 @@ const product = {
   sizes: [39, 40, 41],
 };
 
-const ProductDetails = () => {
+const ProductCard = () => {
   const [selectedSizeIndex, setSelectedSizeIndex] = useState(0);
   const [productQty, setProductQty] = useState(1);
 
@@ -48,82 +43,32 @@ const ProductDetails = () => {
         </Column>
         <Column>
           <ProductDetailsContainer>
-            <ProductName>{product.name}</ProductName>
+            <Heading>{product.name}</Heading>
             <h3>$ {product.price.toFixed(2)}</h3>
             <Paragraph color="#6E6E6E">{product.description}</Paragraph>
 
-            <SizeSelector
+            <ProductSizeSelector
               productSizes={product.sizes}
               selectedSizeIndex={selectedSizeIndex}
               setSelectedSizeIndex={setSelectedSizeIndex}
             />
 
-            <QtyInput value={productQty} setValue={setProductQty} />
+            <ProductQuantityInput value={productQty} setValue={setProductQty} />
 
-            <ActionButtons
+            <ProductActionButtons
               onAddToCart={addToCartHandler}
               onBuyNow={buyNowHandler}
             />
           </ProductDetailsContainer>
         </Column>
       </Row>
+      <Cart />
     </ProductContainer>
   );
 };
 
-const SizeSelector = ({
-  productSizes,
-  selectedSizeIndex,
-  setSelectedSizeIndex,
-}) => {
-  return (
-    <>
-      <Paragraph>
-        Shoe Size: <b>{productSizes[selectedSizeIndex]}</b>
-      </Paragraph>
-      <Row>
-        {productSizes.map((size, index) => (
-          <Column key={index}>
-            <SmallButton
-              onClick={() => setSelectedSizeIndex(index)}
-              isActive={selectedSizeIndex === index}
-            >
-              {size}
-            </SmallButton>
-          </Column>
-        ))}
-      </Row>
-    </>
-  );
-};
-
-const ActionButtons = ({ onAddToCart, onBuyNow }) => (
-  <Row>
-    <Column>
-      <SecondaryButton onClick={onAddToCart}>
-        Add to Cart
-        <i className="fa-solid fa-square-plus"></i>
-      </SecondaryButton>
-    </Column>
-    <Column>
-      <PrimaryButton onClick={onBuyNow}>
-        Buy Now
-        <i className="fa-solid fa-basket-shopping" />
-      </PrimaryButton>
-    </Column>
-  </Row>
-);
-
 const ProductContainer = styled(Container)`
   margin: 64px;
-`;
-
-const ProductName = styled.h1`
-  font-family: "Bruno Ace SC", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 48px;
-  line-height: 48px;
 `;
 
 const ProductDetailsContainer = styled(Container)`
@@ -131,4 +76,4 @@ const ProductDetailsContainer = styled(Container)`
   margin: auto auto auto 30px;
 `;
 
-export default ProductDetails;
+export default ProductCard;

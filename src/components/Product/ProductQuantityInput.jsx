@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Column, Row } from "./";
 
-export const QtyInput = ({ value, setValue }) => {
+const ProductQuantityInput = ({ value, setValue }) => {
   const onDecrement = () => {
-    if (value > 0) setValue((v) => v - 1);
+    if (value > 1) setValue((v) => v - 1);
   };
 
   const onIncrement = () => {
@@ -51,3 +51,5 @@ const QtyButton = styled.button`
   font-size: 16px;
   text-align: center;
 `;
+
+export default ProductQuantityInput;

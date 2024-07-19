@@ -1,10 +1,10 @@
-import ProductDetails from "../components/Product/ProductDetails";
+import ProductCard from "../components/Product/ProductCard";
 import PageLayout from "./PageLayout";
 
 function ProductPage() {
   return (
     <PageLayout>
-      <ProductDetails />
+      <ProductCard />
     </PageLayout>
   );
 }
