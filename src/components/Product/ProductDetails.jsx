@@ -49,8 +49,10 @@ const ProductDetails = () => {
         <Column>
           <ProductDetailsContainer>
             <ProductName>{product.name}</ProductName>
-            <h3>$ {product.price.toFixed(2)}</h3>
-            <Paragraph color="#6E6E6E">{product.description}</Paragraph>
+            <ProductPrice>$ {product.price.toFixed(2)}</ProductPrice>
+            <StyledParagraph color="#6E6E6E">
+              {product.description}
+            </StyledParagraph>
 
             <SizeSelector
               productSizes={product.sizes}
@@ -78,10 +80,10 @@ const SizeSelector = ({
 }) => {
   return (
     <>
-      <Paragraph>
+      <StyledParagraph>
         Shoe Size: <b>{productSizes[selectedSizeIndex]}</b>
-      </Paragraph>
-      <Row>
+      </StyledParagraph>
+      <SizePillContainer>
         {productSizes.map((size, index) => (
           <Column key={index}>
             <SmallButton
@@ -92,7 +94,7 @@ const SizeSelector = ({
             </SmallButton>
           </Column>
         ))}
-      </Row>
+      </SizePillContainer>
     </>
   );
 };
@@ -124,6 +126,21 @@ const ProductName = styled.h1`
   font-style: normal;
   font-size: 48px;
   line-height: 48px;
+  margin-bottom: 24px;
+`;
+
+const ProductPrice = styled.h3`
+  font-size: 32px;
+  margin-bottom: 24px;
+`;
+
+const StyledParagraph = styled(Paragraph)`
+  font-size: 18px;
+  margin-bottom: 24px;
+`;
+
+const SizePillContainer = styled(Row)`
+  margin-bottom: 24px;
 `;
 
 const ProductDetailsContainer = styled(Container)`
