@@ -14,5 +14,6 @@ export const color = {
     primary: "#000",
     secondary: "#ED342A",
     accent: "#BD9F00",
+    accentLight: "#F1D22B",
   },
 };
