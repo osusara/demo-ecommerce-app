@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { color } from "../../theme";
 
 export const Paragraph = styled.p`
   color: ${(props) => props.color};
@@ -11,4 +12,12 @@ export const Heading = styled.h1`
   font-style: normal;
   font-size: 48px;
   line-height: 48px;
+`;
+
+export const SectionHeading = styled.h2`
+  font-size: 36px;
+`;
+
+export const HighlightedText = styled.span`
+  color: ${color.text.secondary};
 `;
