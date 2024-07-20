@@ -42,9 +42,11 @@ const ProductCard = () => {
         </Column>
         <Column>
           <ProductDetailsContainer>
-            <Heading>{product.name}</Heading>
-            <h3>$ {product.price.toFixed(2)}</h3>
-            <Paragraph color="#6E6E6E">{product.description}</Paragraph>
+            <ProductName>{product.name}</ProductName>
+            <ProductPrice>$ {product.price.toFixed(2)}</ProductPrice>
+            <StyledParagraph color="#6E6E6E">
+              {product.description}
+            </StyledParagraph>
 
             <ProductSizeSelector
               productSizes={product.sizes}
@@ -67,6 +69,20 @@ const ProductCard = () => {
 
 const ProductContainer = styled(Container)`
   margin: 64px;
+`;
+
+const ProductName = styled(Heading)`
+  margin-bottom: 24px;
+`;
+
+const ProductPrice = styled.h3`
+  font-size: 32px;
+  margin-bottom: 24px;
+`;
+
+const StyledParagraph = styled(Paragraph)`
+  font-size: 18px;
+  margin-bottom: 24px;
 `;
 
 const ProductDetailsContainer = styled(Container)`

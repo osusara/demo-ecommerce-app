@@ -8,10 +8,10 @@ const ProductSizeSelector = ({
 }) => {
   return (
     <>
-      <Paragraph>
+      <StyledParagraph>
         Shoe Size: <b>{productSizes[selectedSizeIndex]}</b>
-      </Paragraph>
-      <Row>
+      </StyledParagraph>
+      <SizePillContainer>
         {productSizes.map((size, index) => (
           <Column key={index}>
             <SmallButton
@@ -22,7 +22,7 @@ const ProductSizeSelector = ({
             </SmallButton>
           </Column>
         ))}
-      </Row>
+      </SizePillContainer>
     </>
   );
 };
@@ -41,6 +41,15 @@ const SmallButton = styled(Button)`
     color: #ffffff;
     border: none;
   }
+`;
+
+const StyledParagraph = styled(Paragraph)`
+  font-size: 18px;
+  margin-bottom: 24px;
+`;
+
+const SizePillContainer = styled(Row)`
+  margin-bottom: 24px;
 `;
 
 export default ProductSizeSelector;

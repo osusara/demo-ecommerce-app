@@ -31,6 +31,7 @@ export const SecondaryButton = styled(Button)`
   background-color: #ffffff;
   color: #000000;
   border: solid #000000 2px;
+  margin-right: 16px;
 
   &:hover {
     background-color: #000000;

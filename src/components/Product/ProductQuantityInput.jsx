@@ -30,15 +30,16 @@ const ProductQuantityInput = ({ value, setValue }) => {
 const QtyContainer = styled.div`
   background-color: #f3f3f3;
   border-radius: 50px;
-  margin: 20px 0;
-  width: 138px;
+  margin: 24px 0;
+  width: fit-content;
 `;
 
 const QtyValue = styled.span`
-  width: 45px;
+  width: 55px;
   border: none;
   padding: 10px 0;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 700;
   text-align: center;
 `;
 
@@ -48,7 +49,7 @@ const QtyButton = styled.button`
   padding: 10px 20px;
   margin: auto;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 22px;
   text-align: center;
 `;
 
