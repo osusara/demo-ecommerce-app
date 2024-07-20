@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { color } from "../../theme";
 
 const NavItemContainer = styled.ul`
   display: flex;
@@ -13,7 +14,8 @@ const NavItem = styled.li`
   margin: 0 5px;
   padding: 25px 0;
   position: relative;
-  color: ${(props) => (props.active ? "#BD9F00" : "#000000")};
+  color: ${(props) =>
+    props.$isActive ? color.text.accent : color.text.primary};
 
   & a {
     text-decoration: none;
@@ -29,7 +31,8 @@ const NavItem = styled.li`
     position: absolute;
     top: 0;
     left: -16px;
-    background-color: ${(props) => (props.active ? "#BD9F00" : "unset")};
+    background-color: ${(props) =>
+      props.$isActive ? color.text.accent : "unset"};
     width: calc(100% + 32px);
     height: 8px;
     border-bottom-left-radius: 10px;
@@ -40,7 +43,7 @@ const NavItem = styled.li`
 function NavigationItems({ openCart }) {
   return (
     <NavItemContainer>
-      <NavItem active>
+      <NavItem $isActive>
         <a href="#home">Home</a>
       </NavItem>
       <NavItem>
