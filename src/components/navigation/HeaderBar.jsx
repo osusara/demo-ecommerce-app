@@ -13,11 +13,11 @@ const Logo = styled.img`
   margin-bottom: auto;
 `;
 
-function HeaderBar() {
+function HeaderBar({ openCart }) {
   return (
     <Container>
       <Logo src={logo} alt="logo" />
-      <NavigationItems />
+      <NavigationItems openCart={openCart} />
     </Container>
   );
 }

@@ -37,7 +37,7 @@ const NavItem = styled.li`
   }
 `;
 
-function NavigationItems() {
+function NavigationItems({ openCart }) {
   return (
     <NavItemContainer>
       <NavItem active>
@@ -54,6 +54,11 @@ function NavigationItems() {
       </NavItem>
       <NavItem>
         <a href="#collections">Collections</a>
+      </NavItem>
+      <NavItem>
+        <a href="#cart" onClick={openCart}>
+          <i className="fa-solid fa-shopping-cart"></i>
+        </a>
       </NavItem>
     </NavItemContainer>
   );

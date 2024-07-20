@@ -1,8 +1,7 @@
 import { useState } from "react";
-import ProductImage from "./ProductImage";
-import { Row, Column, Paragraph, Container, Heading } from "../common";
 import styled from "styled-components";
-import Cart from "../Cart";
+import { Row, Column, Paragraph, Container, Heading } from "../common";
+import ProductImage from "./ProductImage";
 import ProductSizeSelector from "./ProductSizeSelector";
 import ProductActionButtons from "./ProductActionButtons";
 import ProductQuantityInput from "./ProductQuantityInput";
@@ -62,7 +61,6 @@ const ProductCard = () => {
           </ProductDetailsContainer>
         </Column>
       </Row>
-      <Cart />
     </ProductContainer>
   );
 };

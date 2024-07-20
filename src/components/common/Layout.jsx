@@ -5,6 +5,10 @@ export const Column = styled.div`
   flex-direction: column;
 `;
 
+export const RightColumn = styled(Column)`
+  margin-left: auto;
+`;
+
 export const Row = styled.div`
   display: flex;
   flex-direction: row;

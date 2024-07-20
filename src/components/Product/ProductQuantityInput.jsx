@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Column, Row } from "./";
+import { Column, Row } from "../common";
 
 const ProductQuantityInput = ({ value, setValue }) => {
   const onDecrement = () => {
