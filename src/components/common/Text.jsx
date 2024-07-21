@@ -19,5 +19,5 @@ export const SectionHeading = styled.h2`
 `;
 
 export const HighlightedText = styled.span`
-  color: ${color.text.secondary};
+  color: ${color.text.emphasis};
 `;

@@ -11,8 +11,9 @@ export const color = {
     dark: "#BD9F00",
   },
   text: {
-    primary: "#000",
-    secondary: "#ED342A",
+    heading: "#000",
+    light: "#6E6E6E",
+    emphasis: "#ED342A",
     accent: "#BD9F00",
     accentLight: "#F1D22B",
   },

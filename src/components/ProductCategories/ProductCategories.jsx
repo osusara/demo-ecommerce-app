@@ -19,7 +19,7 @@ const TabItem = styled.a`
   font-size: 20px;
   max-width: 250px;
   cursor: pointer;
-  color: ${(props) => (props.$active ? color.text.accent : color.text.primary)};
+  color: ${(props) => (props.$active ? color.text.accent : color.text.heading)};
 `;
 
 const StyledSection = styled.section`

@@ -15,7 +15,7 @@ const NavItem = styled.li`
   padding: 25px 0;
   position: relative;
   color: ${(props) =>
-    props.$isActive ? color.text.accent : color.text.primary};
+    props.$isActive ? color.text.accent : color.text.heading};
 
   & a {
     text-decoration: none;
