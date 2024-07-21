@@ -23,6 +23,7 @@ const StatisticsContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
+  padding: 40px 0px;
 `;
 
 const Statistic = styled.div`
