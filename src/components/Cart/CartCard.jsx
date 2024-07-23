@@ -47,8 +47,8 @@ const CartCard = ({ isOpen = true, setIsOpen }) => {
   const [subTotal, setSubTotal] = useState(0);
 
   useEffect(function getCartItems() {
-    setCartItems(items)
-  },[])
+    setCartItems(items);
+  }, []);
 
   useEffect(
     function calculateTotal() {
@@ -63,18 +63,17 @@ const CartCard = ({ isOpen = true, setIsOpen }) => {
   );
 
   return isOpen ? (
-    <ModalContainer>
-      <Modal>
-        <CartHeader
-          onClearOrder={() => setCartItems([])}
-          onClose={() => setIsOpen(false)}
-        />
+    <ModalContainer onClick={() => setIsOpen(false)}>
+      <Modal onClick={(e) => e.stopPropagation()}>
+        <CartHeader onClearOrder={() => setCartItems([])} />
         <CartItemsList items={cartItems} />
-        <CartOrderSummary subTotal={subTotal} />
-        <CheckoutButton>
-          Go To Checkout
-          <i className="fa-solid fa-arrow-right"></i>
-        </CheckoutButton>
+        <BottomContainer>
+          <CartOrderSummary subTotal={subTotal} />
+          <CheckoutButton>
+            Go To Checkout
+            <i className="fa-solid fa-arrow-right"></i>
+          </CheckoutButton>
+        </BottomContainer>
       </Modal>
     </ModalContainer>
   ) : null;
@@ -88,19 +87,25 @@ const ModalContainer = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
-  alignitems: center;
-  justifycontent: center;
 `;
 
 const Modal = styled.div`
-  width: 640px;
+  width: 480px;
   padding: 2rem;
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: 1rem 0 0 1rem;
   box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
   position: relative;
   background: white;
-  margin: auto;
+  margin: 0 0 0 auto;
+`;
+
+const BottomContainer = styled.div`
+  width: 416px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 const CheckoutButton = styled(PrimaryButton)`

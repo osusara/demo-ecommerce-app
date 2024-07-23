@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Button, Column, RightColumn, Heading, Row } from "../common";
 
-const CartHeader = ({ onClearOrder, onClose }) => (
+const CartHeader = ({ onClearOrder }) => (
   <Row>
     <Column>
       <HeaderTitle>My Cart</HeaderTitle>
@@ -12,11 +12,6 @@ const CartHeader = ({ onClearOrder, onClose }) => (
         <i className="fa-solid fa-trash"></i>
       </HeaderButton>
     </RightColumn>
-    <Column>
-      <HeaderButton onClick={onClose}>
-        <i className="fa-solid fa-close"></i>
-      </HeaderButton>
-    </Column>
   </Row>
 );
 
@@ -30,8 +25,8 @@ const HeaderButton = styled(Button)`
   border: none;
   color: #262626;
   background-color: transparent;
-  padding: 2px 6px 2px 6px;
-  margin: auto 0 auto 5px;
+  padding: 2px 0 2px 6px;
+  margin: auto 0 auto auto;
 
   &:hover {
     color: #8e8e8e;
