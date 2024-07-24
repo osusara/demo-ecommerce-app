@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { color } from "../../theme";
+import { Link } from "react-router-dom";
 
 const NavItemContainer = styled.ul`
   display: flex;
@@ -44,19 +45,19 @@ function NavigationItems() {
   return (
     <NavItemContainer>
       <NavItem $isActive>
-        <a href="#home">Home</a>
+        <Link to="/">Home</Link>
       </NavItem>
       <NavItem>
-        <a href="#about">About</a>
+        <Link to="/about">About</Link>
       </NavItem>
       <NavItem>
-        <a href="#shop">Shop</a>
+        <Link to="/shop">Shop</Link>
       </NavItem>
       <NavItem>
-        <a href="#testimonials">Testimonials</a>
+        <Link to="/testimonials">Testimonials</Link>
       </NavItem>
       <NavItem>
-        <a href="#collections">Collections</a>
+        <Link to="/collections">Collections</Link>
       </NavItem>
     </NavItemContainer>
   );
