@@ -14,6 +14,7 @@ export const color = {
   text: {
     heading: "#000",
     light: "#6E6E6E",
+    darker: "#767782",
     emphasis: "#ED342A",
     accent: "#BD9F00",
     accentLight: "#F1D22B",
