@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { color } from "../../theme";
 
@@ -14,25 +15,27 @@ const NavItem = styled.li`
   margin: 0 5px;
   padding: 25px 0;
   position: relative;
-  color: ${(props) =>
-    props.$isActive ? color.text.accent : color.text.heading};
+`;
 
-  & a {
-    text-decoration: none;
-    font-size: 18px;
-  }
+const StyledLink = styled(NavLink)`
+  text-decoration: none;
+  font-size: 18px;
+  color: ${color.text.heading};
 
-  & a:hover {
+  &:hover {
     color: #ddd;
   }
 
-  &::before {
+  &.active {
+    color: ${color.text.accent};
+  }
+
+  &.active::before {
     content: "";
     position: absolute;
     top: 0;
     left: -16px;
-    background-color: ${(props) =>
-      props.$isActive ? color.text.accent : "unset"};
+    background-color: ${color.text.accent};
     width: calc(100% + 32px);
     height: 8px;
     border-bottom-left-radius: 10px;
@@ -43,20 +46,20 @@ const NavItem = styled.li`
 function NavigationItems() {
   return (
     <NavItemContainer>
-      <NavItem $isActive>
-        <a href="#home">Home</a>
+      <NavItem>
+        <StyledLink to="/">Home</StyledLink>
       </NavItem>
       <NavItem>
-        <a href="#about">About</a>
+        <StyledLink to="/about">About</StyledLink>
       </NavItem>
       <NavItem>
-        <a href="#shop">Shop</a>
+        <StyledLink to="/shop">Shop</StyledLink>
       </NavItem>
       <NavItem>
-        <a href="#testimonials">Testimonials</a>
+        <StyledLink to="/testimonials">Testimonials</StyledLink>
       </NavItem>
       <NavItem>
-        <a href="#collections">Collections</a>
+        <StyledLink to="/collections">Collections</StyledLink>
       </NavItem>
     </NavItemContainer>
   );

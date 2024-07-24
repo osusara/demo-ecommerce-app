@@ -26,6 +26,7 @@ const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px 0px;
 `;
 
 const TabContent = styled.div`
