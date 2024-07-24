@@ -2,16 +2,20 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Column, Paragraph, RightColumn, Row } from "../common";
 
-const CartOrderSummary = ({ subTotal, deleveryFee = 0, discountPercentage = 0 }) => {
+const CartOrderSummary = ({
+  subTotal,
+  deliveryFee = 0,
+  discountPercentage = 0,
+}) => {
   const [total, setTotal] = useState(subTotal);
   const discountValue = subTotal * (discountPercentage / 100);
 
   useEffect(
     function calculateTotal() {
-      const currentTotal = subTotal - discountValue + deleveryFee;
+      const currentTotal = subTotal - discountValue + deliveryFee;
       setTotal(currentTotal);
     },
-    [deleveryFee, discountValue, subTotal]
+    [deliveryFee, discountValue, subTotal]
   );
 
   return (
@@ -43,7 +47,7 @@ const CartOrderSummary = ({ subTotal, deleveryFee = 0, discountPercentage = 0 })
           <SubTotaText>Delevery Fee</SubTotaText>
         </Column>
         <RightColumn>
-          <SubTotalValue>$ {deleveryFee.toFixed(2)}</SubTotalValue>
+          <SubTotalValue>$ {deliveryFee.toFixed(2)}</SubTotalValue>
         </RightColumn>
       </Row>
 

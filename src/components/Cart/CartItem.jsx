@@ -7,8 +7,8 @@ const CartItem = ({ item }) => {
       <Row>
         <Column>
           <Image
-            src={item.product.images[0]}
-            alt={item.product.name}
+            src={item.product_variant.product.image_url}
+            alt={item.product_variant.product.name}
             width="75px"
             height="75px"
           />
@@ -16,16 +16,16 @@ const CartItem = ({ item }) => {
         <Column>
           <DetailsContainer>
             <Paragraph>
-              <b>{item.product.name}</b>
+              <b>{item.product_variant.product.name}</b>
             </Paragraph>
             <small>
-              Size: {item.selectedSize} | Quantity: {item.qty}
+              {item.product_variant.varient} | Quantity : {item.quantity}
             </small>
           </DetailsContainer>
         </Column>
         <RightColumn>
           <PriceValue>
-            $ {(item.product.price * item.qty).toFixed(2)}
+            $ {(item.product_variant.product.price * item.quantity).toFixed(2)}
           </PriceValue>
         </RightColumn>
       </Row>

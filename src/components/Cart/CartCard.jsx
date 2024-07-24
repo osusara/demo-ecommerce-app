@@ -1,74 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
+import { useCart } from "../../hooks/useCart";
+import { PrimaryButton } from "../common";
 import CartHeader from "./CartHeader";
 import CartOrderSummary from "./CartOrderSummary";
-import { PrimaryButton } from "../common";
 import CartItemsList from "./CartItemsList";
 
-const items = [
-  {
-    id: 1,
-    qty: 2,
-    selectedSize: 40,
-    product: {
-      id: 1,
-      images: [
-        "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg",
-        "https://images.pexels.com/photos/2529147/pexels-photo-2529147.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      ],
-      name: "Air Max Spider",
-      description:
-        "Spiderman Styled Sneakers Men's Football Shoes Outdoor Non- slip Mens Shoes Zapatos Hombres Breathable Man Running Shoes",
-      price: 120,
-      sizes: [39, 40, 41],
-    },
-  },
-  {
-    id: 2,
-    qty: 1,
-    selectedSize: 41,
-    product: {
-      id: 1,
-      images: [
-        "https://images.pexels.com/photos/2529147/pexels-photo-2529147.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg",
-      ],
-      name: "Air Max Spider",
-      description:
-        "Spiderman Styled Sneakers Men's Football Shoes Outdoor Non- slip Mens Shoes Zapatos Hombres Breathable Man Running Shoes",
-      price: 120,
-      sizes: [39, 40, 41],
-    },
-  },
-];
-
 const CartCard = ({ isOpen = true, setIsOpen }) => {
-  const [cartItems, setCartItems] = useState([]);
-  const [subTotal, setSubTotal] = useState(0);
+  const { state, dispatch } = useCart()
 
   useEffect(function getCartItems() {
-    setCartItems(items);
+    // Todo: fetch cartItems
   }, []);
 
-  useEffect(
-    function calculateTotal() {
-      let currentTotal = 0;
-      cartItems.forEach(
-        (item) => (currentTotal = currentTotal + item.product.price * item.qty)
-      );
-
-      setSubTotal(currentTotal);
-    },
-    [cartItems]
-  );
+  const handleClearOrder = () => {
+    dispatch({ type: 'REMOVE_ALL' });
+  }
 
   return isOpen ? (
     <ModalContainer onClick={() => setIsOpen(false)}>
       <Modal onClick={(e) => e.stopPropagation()}>
-        <CartHeader onClearOrder={() => setCartItems([])} />
-        <CartItemsList items={cartItems} />
+        <CartHeader onClearOrder={handleClearOrder} />
+        <CartItemsList items={state.items} />
         <BottomContainer>
-          <CartOrderSummary subTotal={subTotal} />
+          <CartOrderSummary
+            subTotal={state.totalAmount}
+            deliveryFee={state.deliveryFee}
+            discountPercentage={state.discountPercentage}
+          />
           <CheckoutButton>
             Go To Checkout
             <i className="fa-solid fa-arrow-right"></i>

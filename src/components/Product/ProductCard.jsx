@@ -1,12 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { useCart } from "../../hooks/useCart";
 import { Row, Column, Paragraph, Container, Heading } from "../common";
 import ProductImage from "./ProductImage";
 import ProductSizeSelector from "./ProductSizeSelector";
 import ProductActionButtons from "./ProductActionButtons";
 import ProductQuantityInput from "./ProductQuantityInput";
 
-const product = {
+const productMock = {
   id: 1,
   images: [
     "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg",
@@ -17,14 +18,37 @@ const product = {
     "Spiderman Styled Sneakers Men's Football Shoes Outdoor Non- slip Mens Shoes Zapatos Hombres Breathable Man Running Shoes",
   price: 120,
   sizes: [39, 40, 41],
+  collection: {
+    name: "Sandals, Slippers, Boots, Sports, Chapals",
+    id: 1,
+  },
 };
 
-const ProductCard = () => {
+const ProductCard = ({ product = productMock }) => {
   const [selectedSizeIndex, setSelectedSizeIndex] = useState(0);
   const [productQty, setProductQty] = useState(1);
+  const { dispatch } = useCart();
 
   const addToCartHandler = () => {
-    console.log("Add To Cart");
+    dispatch({
+      type: "ADD_ITEM",
+      payload: {
+        quantity: productQty,
+        product_variant: {
+          product: {
+            image_url: product.images[0],
+            price: product.price,
+            name: product.name,
+            description: product.description,
+            id: product.id,
+            collection: product.collection,
+          },
+          varient: `Size ${product.sizes[selectedSizeIndex]}`,
+          id: Math.random(),
+          stock: 899,
+        },
+      },
+    });
   };
 
   const buyNowHandler = () => {

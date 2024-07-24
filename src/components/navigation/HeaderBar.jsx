@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import { useCart } from "../../hooks/useCart";
 import logo from "/logo.svg";
 import NavigationItems from "./NavigationItems";
 
 function HeaderBar({ openCart }) {
+  const { state } = useCart()
   return (
     <Container>
       <Logo src={logo} alt="logo" />
@@ -10,7 +12,7 @@ function HeaderBar({ openCart }) {
       <CartButton onClick={openCart}>
         <IconWrapper>
           <i className="fa-solid fa-shopping-cart"></i>
-          <Badge>3</Badge>
+          <Badge>{state.items.length}</Badge>
         </IconWrapper>
       </CartButton>
     </Container>
