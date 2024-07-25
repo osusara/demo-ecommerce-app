@@ -9,7 +9,7 @@ const ProductSizeSelector = ({
   return (
     <>
       <StyledParagraph>
-        Shoe <b>{selectedVarient.varient}</b>
+        Shoe <b>{productVarients[0].varient}</b>
       </StyledParagraph>
       <SizePillContainer>
         {productVarients.map((varientItem) => (
