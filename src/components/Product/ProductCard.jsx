@@ -1,11 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useCart } from "../../hooks/useCart";
-import { Row, Column, Paragraph, Container, Heading } from "../common";
-import ProductImage from "./ProductImage";
-import ProductSizeSelector from "./ProductSizeSelector";
+import { Column, Container, Heading, Paragraph, Row } from "../common";
 import ProductActionButtons from "./ProductActionButtons";
+import ProductImage from "./ProductImage";
 import ProductQuantityInput from "./ProductQuantityInput";
+import ProductRating from "./ProductRating";
+import ProductSizeSelector from "./ProductSizeSelector";
 
 const productMock = {
   id: 1,
@@ -68,6 +69,7 @@ const ProductCard = ({ product = productMock }) => {
           <ProductDetailsContainer>
             <ProductName>{product.name}</ProductName>
             <ProductPrice>$ {product.price.toFixed(2)}</ProductPrice>
+            <ProductRating rating={4.5} />
             <StyledParagraph color="#6E6E6E">
               {product.description}
             </StyledParagraph>
