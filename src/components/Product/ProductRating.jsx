@@ -32,7 +32,7 @@ const StarIcon = ({ filled, color }) => {
 };
 
 const ProductRating = ({ rating }) => {
-  const filledCount = Math.floor(rating);
+  const filledCount = Math.floor(2);
   const stars = Array.from({ length: 5 }).map((_, i) =>
     i < filledCount ? true : false
   );
