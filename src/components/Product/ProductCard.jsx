@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
       quantity: productQty,
       product_variant: {
         product: {
-          image_url: product.image_urls[0],
+          image_url: product.image_url,
           price: product.price,
           name: product.name,
           description: product.description,

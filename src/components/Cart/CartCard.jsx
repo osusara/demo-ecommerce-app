@@ -6,11 +6,11 @@ import CartOrderSummary from "./CartOrderSummary";
 import CartItemsList from "./CartItemsList";
 
 const CartCard = ({ isOpen = true, setIsOpen }) => {
-  const { state, dispatch } = useCart()
+  const { state, dispatch } = useCart();
 
   const handleClearOrder = () => {
-    dispatch({ type: 'REMOVE_ALL' });
-  }
+    dispatch({ type: "REMOVE_ALL" });
+  };
 
   return isOpen ? (
     <ModalContainer onClick={() => setIsOpen(false)}>
@@ -37,10 +37,12 @@ const ModalContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
+  flex-direction: column;
   z-index: 100;
 `;
 
@@ -48,19 +50,17 @@ const Modal = styled.div`
   width: 480px;
   padding: 2rem;
   border: 0;
-  border-radius: 1rem 0 0 1rem;
   box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
   position: relative;
   background: white;
   margin: 0 0 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const BottomContainer = styled.div`
   width: 416px;
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
 `;
 
 const CheckoutButton = styled(PrimaryButton)`

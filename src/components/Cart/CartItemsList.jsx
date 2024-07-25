@@ -12,7 +12,7 @@ const CartItemsList = ({ items = [] }) => {
 };
 
 const CartItemsContainer = styled.div`
-  height: 480px;
+  flex: 1;
   margin-top: 30px;
   overflow-y: auto;
 `;
