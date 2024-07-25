@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import {
   Row,
   Column,
@@ -22,10 +23,12 @@ const HeroSection = () => {
               Find your shoes from our various collections. Here shoes are
               endless and profit is also endless.
             </HeroParagraph>
-            <PrimaryButton>
-              Shop Now
-              <i className="fa-solid fa-arrow-right"></i>
-            </PrimaryButton>
+            <Link to="/shop">
+              <PrimaryButton>
+                Shop Now
+                <i className="fa-solid fa-arrow-right"></i>
+              </PrimaryButton>
+            </Link>
           </PaddingContainer>
           <HeroCarousel />
         </Column>

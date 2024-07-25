@@ -10,7 +10,6 @@ const cardData = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus eget pellentesque sit leo gravida.",
     iconClass: "ph ph-phone",
-    selected: false,
   },
   {
     id: 2,
@@ -18,7 +17,6 @@ const cardData = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus eget pellentesque sit leo gravida.",
     iconClass: "ph ph-money-wavy",
-    selected: false,
   },
   {
     id: 3,
@@ -26,7 +24,6 @@ const cardData = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus eget pellentesque sit leo gravida.",
     iconClass: "ph ph-seal-percent",
-    selected: false,
   },
   {
     id: 4,
@@ -34,7 +31,6 @@ const cardData = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus eget pellentesque sit leo gravida.",
     iconClass: "ph ph-users",
-    selected: true,
   },
 ];
 
@@ -63,10 +59,6 @@ const CardHeading = styled(Heading)`
   margin: 24px 0px;
 `;
 
-// ${({ $selected }) => `
-// color: ${$selected ? color.text.emphasis : color.text.accent};
-// `}
-
 const Logo = styled.img`
   width: 64px;
   margin: 20px 0px;
@@ -81,19 +73,21 @@ const Card = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+  background-color: #fff;
+  color: ${color.text.darker};
 
-  ${({ $selected }) => `
-    background-color: ${$selected ? "#000" : "#fff"};
-     color: ${$selected ? "#fff" : color.text.darker};
+  &:hover {
+    background-color: #000;
+    color: #fff;
 
     & ${CardHeading} {
-      color: ${$selected ? color.text.emphasis : color.text.accent};
+      color: ${color.text.emphasis};
     }
 
     & ${Logo} {
-      filter: invert(${$selected ? 1 : 0});
+      filter: invert(1);
     }
-  `}
+  }
 `;
 
 const CardContainer = styled.div`
@@ -111,9 +105,9 @@ const WhatWeOffer = () => {
       </SectionHeading>
       <CardContainer>
         {cardData.map((data) => (
-          <Card $selected={data.selected} key={data.id}>
+          <Card key={data.id}>
             <CardIcon className={data.iconClass} />
-            <CardHeading $selected={data.selected}>{data.heading}</CardHeading>
+            <CardHeading>{data.heading}</CardHeading>
             {data.description}
             <Logo src={logo} alt="logo" />
           </Card>

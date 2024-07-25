@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Row, Column, Image, Paragraph } from "../common";
 import { color } from "../../theme";
+import { useNavigate } from "react-router-dom";
 
 const carouselItemsMock = [
   {
@@ -25,27 +26,41 @@ const carouselItemsMock = [
 ];
 
 const HeroCarousel = ({ carouselItems = carouselItemsMock }) => {
+  const navigate = useNavigate()
   const [items, setItems] = useState(carouselItems);
   const dots = carouselItems.map((item) => item.id);
 
-  const onClickDot = (startId) => {
-    const currentItemsOrder = items;
-    const startIndex = currentItemsOrder.findIndex(
-      (item) => item.id === startId
-    );
-    if (startIndex === -1) return;
+  const onClickDot = useCallback(
+    (startId) => {
+      const currentItemsOrder = items;
+      const startIndex = currentItemsOrder.findIndex(
+        (item) => item.id === startId
+      );
+      if (startIndex === -1) return;
 
-    const part1 = currentItemsOrder.slice(startIndex);
-    const part2 = currentItemsOrder.slice(0, startIndex);
+      const part1 = currentItemsOrder.slice(startIndex);
+      const part2 = currentItemsOrder.slice(0, startIndex);
 
-    setItems(part1.concat(part2));
-  };
+      setItems(part1.concat(part2));
+    },
+    [items]
+  );
+
+  useEffect(() => {
+    const autoRotateCarouselItems = setInterval(() => {
+      onClickDot(items[1].id);
+    }, 5000);
+
+    return () => {
+      clearInterval(autoRotateCarouselItems);
+    };
+  }, [items, onClickDot]);
 
   return (
     <CarouselContainer>
       <Carousel>
         {items.map((item) => (
-          <CarouselItem key={item.id}>
+          <CarouselItem key={item.id} onClick={() => navigate(`/products/${item.id}`)}>
             <Row>
               <Column>
                 <Image
@@ -100,6 +115,7 @@ const CarouselItem = styled.div`
   margin: 10px;
   background-color: #000000;
   border-radius: 8px;
+  cursor: pointer;
 `;
 
 const CarouselDots = styled.div`
