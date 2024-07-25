@@ -5,12 +5,20 @@ import { useNavigate } from "react-router-dom";
 
 const ProductImage = styled(Image)`
   aspect-ratio: 1 / 0.95;
-  filter: brightness(0.6);
+  filter: brightness(0.98);
+  mix-blend-mode: color;
+  border-radius: 16px;
 `;
 
 const Container = styled.div`
   position: relative;
   cursor: pointer;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 60%,
+    rgb(0 0 0 / 70%) 100%
+  );
+  border-radius: 16px;
 `;
 
 const CardTextContainer = styled.div`
