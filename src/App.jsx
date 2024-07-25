@@ -10,58 +10,32 @@ import CollectionsPage from "./pages/CollectionsPage";
 import PageLayout from "./pages/PageLayout";
 import "./App.css";
 
-const itemsMock = [
-  {
-    quantity: 1,
-    product_variant: {
-      product: {
-        image_url:
-          "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg",
-        price: 99.99,
-        name: "Air Max 60",
-        description: "High-quality running shoes for all terrains.",
-        id: 2,
-        collection: {
-          name: "Sandals, Slippers, Boots, Sports, Chapals",
-          id: 1,
-        },
-      },
-      varient: "Size 9",
-      id: 1,
-      stock: 899,
-    },
-  },
-  {
-    quantity: 1,
-    product_variant: {
-      product: {
-        image_url:
-          "https://images.pexels.com/photos/2529147/pexels-photo-2529147.jpeg",
-        price: 89.99,
-        name: "Air Max 40",
-        description: "High-quality running shoes for the track",
-        id: 2,
-        collection: {
-          name: "Sandals, Slippers, Boots, Sports, Chapals",
-          id: 1,
-        },
-      },
-      varient: "Size 9",
-      id: 2,
-      stock: 899,
-    },
-  },
-];
+const cart_id = "be730553-8b56-49cb-9cf4-ff170d3e8a9e";
 
 function App() {
   const { dispatch } = useCart();
 
-  useEffect(
-    function fetchCart() {
-      dispatch({ type: "ADD_ITEMS", payload: itemsMock });
-    },
-    [dispatch]
-  );
+  useEffect(() => {
+    async function fetchCart() {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/v1/carts/${cart_id}`
+        );
+
+        if (!response.ok) throw new Error("Error in getting cart data");
+
+        const cart = await response.json();
+        dispatch({
+          type: "ADD_ITEMS",
+          payload: { id: cart_id, items: cart.items },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchCart();
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

@@ -3,6 +3,7 @@ import { createContext, useReducer } from "react";
 export const CartContext = createContext();
 
 const initialState = {
+  id: undefined,
   items: [],
   totalAmount: 0,
   deliveryFee: 0,
@@ -25,8 +26,7 @@ const cartReducer = (state, action) => {
   }
 };
 
-const addItem = (currentState, payload) => {
-  // Todo: API call
+const addItem = async (currentState, payload) => {
   const updatedItems = [...currentState.items, payload];
 
   const newTotalAmount =
@@ -37,6 +37,7 @@ const addItem = (currentState, payload) => {
   const newDiscountPercentage = newTotalAmount > 500 ? 5 : 0
 
   return {
+    ...currentState,
     items: updatedItems,
     totalAmount: newTotalAmount,
     deliveryFee: newDeliveryFee,
@@ -46,7 +47,7 @@ const addItem = (currentState, payload) => {
 
 const addItems = (payload) => {
   let newTotalAmount = 0;
-  payload.forEach(
+  payload.items.forEach(
     (item) =>
       (newTotalAmount = item.product_variant.product.price * item.quantity)
   );
@@ -55,7 +56,8 @@ const addItems = (payload) => {
   const newDiscountPercentage = newTotalAmount > 500 ? 5 : 0;
 
   return {
-    items: payload,
+    id: payload.id,
+    items: payload.items,
     totalAmount: newTotalAmount,
     deliveryFee: newDeliveryFee,
     discountPercentage: newDiscountPercentage,

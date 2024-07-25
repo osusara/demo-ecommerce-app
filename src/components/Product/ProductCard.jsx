@@ -8,48 +8,52 @@ import ProductQuantityInput from "./ProductQuantityInput";
 import ProductRating from "./ProductRating";
 import ProductSizeSelector from "./ProductSizeSelector";
 
-const productMock = {
-  id: 1,
-  images: [
-    "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg",
-    "https://images.pexels.com/photos/2529147/pexels-photo-2529147.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  ],
-  name: "Air Max Spider",
-  description:
-    "Spiderman Styled Sneakers Men's Football Shoes Outdoor Non- slip Mens Shoes Zapatos Hombres Breathable Man Running Shoes",
-  price: 120,
-  sizes: [39, 40, 41],
-  collection: {
-    name: "Sandals, Slippers, Boots, Sports, Chapals",
-    id: 1,
-  },
-};
-
-const ProductCard = ({ product = productMock }) => {
-  const [selectedSizeIndex, setSelectedSizeIndex] = useState(0);
+const ProductCard = ({ product }) => {
+  const [selectedVarient, setSelectedVarient] = useState(
+    product.product_variant[0]
+  );
   const [productQty, setProductQty] = useState(1);
-  const { dispatch } = useCart();
+  const { state, dispatch } = useCart();
 
-  const addToCartHandler = () => {
-    dispatch({
-      type: "ADD_ITEM",
-      payload: {
-        quantity: productQty,
-        product_variant: {
-          product: {
-            image_url: product.images[0],
-            price: product.price,
-            name: product.name,
-            description: product.description,
-            id: product.id,
-            collection: product.collection,
-          },
-          varient: `Size ${product.sizes[selectedSizeIndex]}`,
-          id: Math.random(),
-          stock: 899,
+  const addToCartHandler = async () => {
+    const payload = {
+      quantity: productQty,
+      product_variant: {
+        product: {
+          image_url: product.image_urls[0],
+          price: product.price,
+          name: product.name,
+          description: product.description,
+          id: product.id,
+          collection: product.collection,
         },
+        varient: selectedVarient.varient,
+        id: Math.random(),
+        stock: selectedVarient.stock,
       },
-    });
+    };
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/v1/user/${1}/cart/${state.id}/add`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) throw new Error("Error in adding item to cart");
+
+      dispatch({
+        type: "ADD_ITEM",
+        payload,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const buyNowHandler = () => {
@@ -61,7 +65,7 @@ const ProductCard = ({ product = productMock }) => {
       <Row>
         <Column>
           <ProductImage
-            productImages={product.images}
+            productImages={product.image_urls}
             productName={product.name}
           />
         </Column>
@@ -75,9 +79,9 @@ const ProductCard = ({ product = productMock }) => {
             </StyledParagraph>
 
             <ProductSizeSelector
-              productSizes={product.sizes}
-              selectedSizeIndex={selectedSizeIndex}
-              setSelectedSizeIndex={setSelectedSizeIndex}
+              productVarients={product.product_variant}
+              selectedVarient={selectedVarient}
+              setSelectedVarient={setSelectedVarient}
             />
 
             <ProductQuantityInput value={productQty} setValue={setProductQty} />

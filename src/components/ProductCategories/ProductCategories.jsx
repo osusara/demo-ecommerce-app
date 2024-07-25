@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { color } from "../../theme";
 import { HighlightedText, SectionHeading } from "../common/Text";
-import { categoryDetails, categoryList } from "./data";
 import ProductCard from "./ProductCard";
 
 const TabHeaders = styled.nav`
@@ -41,9 +40,24 @@ const ProductCategoryTab = ({ category }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // TODO: set from response
-    setProducts(categoryDetails[category.id].products);
-  }, [category]);
+    async function fetchProductsByCategory() {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/api/v1/products?collection_id=${1}&page=0`
+        );
+
+        if (!response.ok)
+          throw new Error("Error in fetching products by category");
+
+        const productsByCategory = await response.json();
+        setProducts(productsByCategory.items);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    
+    fetchProductsByCategory();
+  }, []);
 
   if (!category) return null;
 
@@ -61,9 +75,23 @@ const ProductCategories = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
-    // TODO: set from response
-    setCategories(categoryList);
-    setSelectedCategory(categoryList[0]);
+    async function fetchCategories() {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/v1/collections"
+        );
+
+        if (!response.ok) throw new Error("Error in fetching categories");
+
+        const categories = await response.json();
+        setCategories(categories);
+        setSelectedCategory(categories[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchCategories();
   }, []);
 
   if (!categories) return null;

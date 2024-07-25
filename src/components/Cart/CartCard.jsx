@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 import { useCart } from "../../hooks/useCart";
 import { PrimaryButton } from "../common";
@@ -8,10 +7,6 @@ import CartItemsList from "./CartItemsList";
 
 const CartCard = ({ isOpen = true, setIsOpen }) => {
   const { state, dispatch } = useCart()
-
-  useEffect(function getCartItems() {
-    // Todo: fetch cartItems
-  }, []);
 
   const handleClearOrder = () => {
     dispatch({ type: 'REMOVE_ALL' });
