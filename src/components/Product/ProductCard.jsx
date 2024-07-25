@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
       product_variant: {
         product: {
           image_url: product.image_urls[0],
-          price: product.price,
+          price: 50,
           name: product.name,
           description: product.description,
           id: product.id,
