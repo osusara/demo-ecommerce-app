@@ -65,6 +65,7 @@ const Logo = styled.img`
 `;
 
 const Card = styled.div`
+  max-width: 300px;
   padding: 24px;
   border-radius: 12px;
   height: 100%;
@@ -91,9 +92,9 @@ const Card = styled.div`
 `;
 
 const CardContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: flex;
   gap: 24px;
+  justify-content: center;
   margin-top: 20px;
 `;
 
