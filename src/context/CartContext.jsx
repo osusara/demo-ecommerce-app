@@ -21,12 +21,15 @@ const cartReducer = (state, action) => {
     case "REMOVE_ALL":
       return initialState;
 
+    case "CART_ERROR":
+      return { ...state, id: action.payload };
+
     default:
       return state;
   }
 };
 
-const addItem = async (currentState, payload) => {
+const addItem = (currentState, payload) => {
   const updatedItems = [...currentState.items, payload];
 
   const newTotalAmount =
@@ -66,6 +69,7 @@ const addItems = (payload) => {
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
+  console.log(state)
 
   return (
     <CartContext.Provider value={{ state, dispatch }}>

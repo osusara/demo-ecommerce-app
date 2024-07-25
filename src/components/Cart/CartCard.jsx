@@ -41,6 +41,7 @@ const ModalContainer = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
+  z-index: 100;
 `;
 
 const Modal = styled.div`

@@ -12,7 +12,9 @@ const CartItemsList = ({ items = [] }) => {
 };
 
 const CartItemsContainer = styled.div`
-  margin-top: 45px;
+  height: 480px;
+  margin-top: 30px;
+  overflow-y: auto;
 `;
 
 export default CartItemsList;

@@ -22,7 +22,8 @@ function App() {
           `http://localhost:8080/api/v1/carts/${cart_id}`
         );
 
-        if (!response.ok) throw new Error("Error in getting cart data");
+        if (!response.ok)
+          throw new Error("Error in getting cart data");
 
         const cart = await response.json();
         dispatch({
@@ -30,6 +31,7 @@ function App() {
           payload: { id: cart_id, items: cart.items },
         });
       } catch (error) {
+        dispatch({ type: "CART_ERROR", payload: cart_id });
         console.log(error);
       }
     }

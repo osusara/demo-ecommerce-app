@@ -45,7 +45,8 @@ const ProductCard = ({ product }) => {
         }
       );
 
-      if (!response.ok) throw new Error("Error in adding item to cart");
+      if (!response.ok) 
+        throw new Error("Error in adding item to cart");
 
       dispatch({
         type: "ADD_ITEM",
@@ -53,6 +54,12 @@ const ProductCard = ({ product }) => {
       });
     } catch (error) {
       console.log(error);
+
+      // Todo: need to remove
+      dispatch({
+        type: "ADD_ITEM",
+        payload,
+      });
     }
   };
 
