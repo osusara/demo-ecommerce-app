@@ -9,7 +9,7 @@ import ProductRating from "./ProductRating";
 import ProductSizeSelector from "./ProductSizeSelector";
 
 const ProductCard = ({ product }) => {
-  const [selectedVarient, setSelectedVarient] = useState(
+  const [selectedVariant, setSelectedVariant] = useState(
     product.product_variant[0]
   );
   const [productQty, setProductQty] = useState(1);
@@ -27,9 +27,9 @@ const ProductCard = ({ product }) => {
           id: product.id,
           collection: product.collection,
         },
-        varient: selectedVarient.varient,
+        varient: selectedVariant.variant,
         id: Math.random(),
-        stock: selectedVarient.stock,
+        stock: selectedVariant.stock,
       },
     };
 
@@ -85,9 +85,9 @@ const ProductCard = ({ product }) => {
             </StyledParagraph>
 
             <ProductSizeSelector
-              productVarients={product.product_variant}
-              selectedVarient={selectedVarient}
-              setSelectedVarient={setSelectedVarient}
+              productVariants={product.product_variant}
+              selectedVariant={selectedVariant}
+              setSelectedVariant={setSelectedVariant}
             />
 
             <ProductQuantityInput value={productQty} setValue={setProductQty} />

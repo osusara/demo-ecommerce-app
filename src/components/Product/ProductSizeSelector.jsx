@@ -2,23 +2,23 @@ import styled from "styled-components";
 import { Button, Column, Paragraph, Row } from "../common";
 
 const ProductSizeSelector = ({
-  productVarients,
-  selectedVarient,
-  setSelectedVarient,
+  productVariants,
+  selectedVariant,
+  setSelectedVariant,
 }) => {
   return (
     <>
       <StyledParagraph>
-        Shoe <b>{selectedVarient.varient}</b>
+        Shoe Size : <b>{selectedVariant.variant.replace(/^\D+/g, "")}</b>
       </StyledParagraph>
       <SizePillContainer>
-        {productVarients.map((varientItem) => (
-          <Column key={varientItem.id}>
+        {productVariants.map((variant) => (
+          <Column key={variant.id}>
             <SmallButton
-              onClick={() => setSelectedVarient(varientItem)}
-              $isActive={selectedVarient.id === varientItem.id}
+              onClick={() => setSelectedVariant(variant)}
+              $isActive={selectedVariant.id === variant.id}
             >
-              {varientItem.varient}
+              {variant.variant.replace(/^\D+/g, "")}
             </SmallButton>
           </Column>
         ))}
