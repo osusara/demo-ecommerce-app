@@ -47,7 +47,7 @@ function NavigationItems() {
   return (
     <NavItemContainer>
       <NavItem>
-        <StyledLink to="/">Home</StyledLink>
+        <StyledLink to="/">Hone</StyledLink>
       </NavItem>
       <NavItem>
         <StyledLink to="/about">About</StyledLink>
