@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
 
   const addToCartHandler = async () => {
     const payload = {
-      quantity: productQty,
+      quantity: 1,
       product_variant: {
         product: {
           image_url: product.image_urls[0],
