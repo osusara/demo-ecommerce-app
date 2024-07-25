@@ -36,6 +36,12 @@ const TabContent = styled.div`
   gap: 16px;
 `;
 
+const NoContentMessage = styled.div`
+  grid-column: 2;
+  text-align: center;
+  font-size: 20px;
+`;
+
 const ProductCategoryTab = ({ collection }) => {
   const [products, setProducts] = useState([]);
 
@@ -64,6 +70,9 @@ const ProductCategoryTab = ({ collection }) => {
 
   return (
     <TabContent>
+      {!products.length && (
+        <NoContentMessage>No products in collection</NoContentMessage>
+      )}
       {products.map((product) => (
         <ProductCard product={product} key={product.id} />
       ))}
