@@ -45,8 +45,7 @@ const ProductCard = ({ product }) => {
         }
       );
 
-      if (!response.ok) 
-        throw new Error("Error in adding item to cart");
+      if (!response.ok) throw new Error("Error in adding item to cart");
 
       dispatch({
         type: "ADD_ITEM",
@@ -72,7 +71,7 @@ const ProductCard = ({ product }) => {
       <Row>
         <Column>
           <ProductImage
-            productImages={product.image_urls}
+            productImage={product.image_url}
             productName={product.name}
           />
         </Column>

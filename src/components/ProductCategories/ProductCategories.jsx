@@ -40,6 +40,7 @@ const NoContentMessage = styled.div`
   grid-column: 2;
   text-align: center;
   font-size: 20px;
+  margin: 90px 0px;
 `;
 
 const ProductCategoryTab = ({ collection }) => {
