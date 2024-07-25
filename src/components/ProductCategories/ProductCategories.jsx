@@ -36,14 +36,16 @@ const TabContent = styled.div`
   gap: 16px;
 `;
 
-const ProductCategoryTab = ({ category }) => {
+const ProductCategoryTab = ({ collection }) => {
   const [products, setProducts] = useState([]);
+
+  console.log(collection);
 
   useEffect(() => {
     async function fetchProductsByCategory() {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/v1/products?collection_id=${1}&page=0`
+          `http://ec2-3-140-126-49.us-east-2.compute.amazonaws.com/product/?collection_id=${collection.id}`
         );
 
         if (!response.ok)
@@ -52,14 +54,13 @@ const ProductCategoryTab = ({ category }) => {
         const productsByCategory = await response.json();
         setProducts(productsByCategory.items);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
-    
     fetchProductsByCategory();
-  }, []);
+  }, [collection.id]);
 
-  if (!category) return null;
+  if (!collection) return null;
 
   return (
     <TabContent>
@@ -71,30 +72,30 @@ const ProductCategoryTab = ({ category }) => {
 };
 
 const ProductCategories = () => {
-  const [categories, setCategories] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [collections, setCollections] = useState(null);
+  const [selectedCollection, setSelectedCollection] = useState(null);
 
   useEffect(() => {
-    async function fetchCategories() {
+    async function fetchCollections() {
       try {
         const response = await fetch(
-          "http://localhost:8080/api/v1/collections"
+          "http://ec2-3-140-126-49.us-east-2.compute.amazonaws.com/collection/"
         );
 
         if (!response.ok) throw new Error("Error in fetching categories");
 
-        const categories = await response.json();
-        setCategories(categories);
-        setSelectedCategory(categories[0]);
+        const collections = await response.json();
+        setCollections(collections);
+        setSelectedCollection(collections[0]);
       } catch (error) {
         console.log(error);
       }
     }
 
-    fetchCategories();
+    fetchCollections();
   }, []);
 
-  if (!categories) return null;
+  if (!collections) return null;
 
   return (
     <StyledSection>
@@ -102,18 +103,20 @@ const ProductCategories = () => {
         Our Latest <HighlightedText>Collection</HighlightedText>
       </SectionHeading>
       <TabHeaders role="tablist">
-        {categories.map((category) => (
+        {collections.map((collection) => (
           <TabItem
-            $active={selectedCategory.id === category.id}
-            onClick={() => setSelectedCategory(category)}
-            key={category.id}
-            id={category.id}
+            $active={selectedCollection?.id === collection.id}
+            onClick={() => setSelectedCollection(collection)}
+            key={collection.id}
+            id={collection.id}
           >
-            {category.name}
+            {collection.name}
           </TabItem>
         ))}
       </TabHeaders>
-      <ProductCategoryTab category={selectedCategory} />
+      {selectedCollection && (
+        <ProductCategoryTab collection={selectedCollection} />
+      )}
     </StyledSection>
   );
 };

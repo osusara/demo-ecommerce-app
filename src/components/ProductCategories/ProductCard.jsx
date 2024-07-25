@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProductImage = styled(Image)`
   aspect-ratio: 1 / 0.95;
+  filter: brightness(0.5);
 `;
 
 const Container = styled.div`
@@ -44,7 +45,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <Container onClick={handleOnClick} key={product.id}>
-      <ProductImage src={product.image} />
+      <ProductImage src={product.image_url} />
       <CardTextContainer>
         <CardText>$ {product.price}</CardText>
         <CardText>{product.name}</CardText>
