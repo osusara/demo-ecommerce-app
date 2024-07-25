@@ -8,7 +8,7 @@ const ProductImage = ({ productImages, productName }) => {
   return (
     <>
       <Image
-        src={productImages[selectedImageIndex]}
+        src={productImages[0]}
         alt={`${productName} ${selectedImageIndex}`}
         width="380px"
         height="380px"
