@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProductImage = styled(Image)`
   aspect-ratio: 1 / 0.95;
-  filter: brightness(0.5);
+  filter: brightness(0.6);
 `;
 
 const Container = styled.div`
@@ -41,7 +41,10 @@ const UnderLine = styled.hr`
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
-  const handleOnClick = () => navigate(`/products/${product.id}`);
+  const handleOnClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    navigate(`/products/${product.id}`);
+  };
 
   return (
     <Container onClick={handleOnClick} key={product.id}>
