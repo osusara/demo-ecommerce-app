@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { color } from "../../theme";
 import { Image } from "../common";
+import { useNavigate } from "react-router-dom";
 
 const ProductImage = styled(Image)`
   aspect-ratio: 1 / 0.95;
@@ -38,8 +39,11 @@ const UnderLine = styled.hr`
 `;
 
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+  const handleOnClick = () => navigate(`/products/${product.id}`);
+
   return (
-    <Container key={product.id}>
+    <Container onClick={handleOnClick} key={product.id}>
       <ProductImage src={product.image} />
       <CardTextContainer>
         <CardText>$ {product.price}</CardText>
