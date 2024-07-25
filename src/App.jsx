@@ -4,6 +4,7 @@ import { useCart } from "./hooks/useCart";
 import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
+import ProductPage from "./pages/ProductPage";
 import TestimonialsPage from "./pages/TestimonialsPage";
 import CollectionsPage from "./pages/CollectionsPage";
 import PageLayout from "./pages/PageLayout";
@@ -53,11 +54,14 @@ const itemsMock = [
 ];
 
 function App() {
-  const { dispatch } = useCart()
+  const { dispatch } = useCart();
 
-  useEffect(function fetchCart() {
-    dispatch({ type: 'ADD_ITEMS', payload: itemsMock })
-  }, [dispatch])
+  useEffect(
+    function fetchCart() {
+      dispatch({ type: "ADD_ITEMS", payload: itemsMock });
+    },
+    [dispatch]
+  );
 
   return (
     <BrowserRouter>
@@ -68,6 +72,7 @@ function App() {
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/testimonials" element={<TestimonialsPage />} />
           <Route path="/collections" element={<CollectionsPage />} />
+          <Route path="/products/:productId" element={<ProductPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
