@@ -44,36 +44,10 @@ const NoContentMessage = styled.div`
   margin: 90px 0px;
 `;
 
-const ProductCategoryTab = ({ collection }) => {
-  const [products, setProducts] = useState([]);
-
-  console.log(collection);
-
-  useEffect(() => {
-    async function fetchProductsByCategory() {
-      try {
-        const response = await fetch(
-          `${API_URL}/product/?collection_id=${collection.id}`,
-          { cache: "force-cache" }
-        );
-
-        if (!response.ok)
-          throw new Error("Error in fetching products by category");
-
-        const productsByCategory = await response.json();
-        setProducts(productsByCategory.items);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchProductsByCategory();
-  }, [collection.id]);
-
-  if (!collection) return null;
-
+const ProductCategoryTab = ({ products }) => {
   return (
     <TabContent>
-      {!products.length && (
+      {!products?.length && (
         <NoContentMessage>No products in this collection</NoContentMessage>
       )}
       {products.map((product) => (
@@ -85,20 +59,20 @@ const ProductCategoryTab = ({ collection }) => {
 
 const ProductCategories = () => {
   const [collections, setCollections] = useState(null);
-  const [selectedCollection, setSelectedCollection] = useState(null);
+  const [selectedCollectionId, setSelectedCollectionId] = useState(null);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function fetchCollections() {
       try {
-        const response = await fetch(
-          `${API_URL}/collection/`
-        );
+        const response = await fetch(`${API_URL}/collection/`);
 
         if (!response.ok) throw new Error("Error in fetching categories");
 
         const collections = await response.json();
         setCollections(collections);
-        setSelectedCollection(collections[0]);
+        setSelectedCollectionId(collections[0].id);
+        fetchProducts(collections[0].id);
       } catch (error) {
         console.log(error);
       }
@@ -106,6 +80,24 @@ const ProductCategories = () => {
 
     fetchCollections();
   }, []);
+
+  async function fetchProducts(collectionId) {
+    try {
+      setSelectedCollectionId(collectionId);
+      const response = await fetch(
+        `${API_URL}/product/?collection_id=${collectionId}`,
+        { cache: "force-cache" }
+      );
+
+      if (!response.ok)
+        throw new Error("Error in fetching products by category");
+
+      const productsByCategory = await response.json();
+      setProducts(productsByCategory.items);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   if (!collections) return null;
 
@@ -117,8 +109,8 @@ const ProductCategories = () => {
       <TabHeaders role="tablist">
         {collections.map((collection) => (
           <TabItem
-            $active={selectedCollection?.id === collection.id}
-            onClick={() => setSelectedCollection(collection)}
+            $active={selectedCollectionId === collection.id}
+            onClick={() => fetchProducts(collection.id)}
             key={collection.id}
             id={collection.id}
           >
@@ -126,9 +118,7 @@ const ProductCategories = () => {
           </TabItem>
         ))}
       </TabHeaders>
-      {selectedCollection && (
-        <ProductCategoryTab collection={selectedCollection} />
-      )}
+      <ProductCategoryTab products={products} />
     </StyledSection>
   );
 };
