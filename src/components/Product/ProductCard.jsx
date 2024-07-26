@@ -1,8 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { useCart } from "../../hooks/useCart";
 import { Column, Container, Heading, Paragraph, Row } from "../common";
-import ProductActionButtons from "./ProductActionButtons";
 import ProductImage from "./ProductImage";
 import ProductQuantityInput from "./ProductQuantityInput";
 import ProductRating from "./ProductRating";
@@ -13,35 +11,12 @@ const ProductCard = ({ product }) => {
     product.product_variant[0]
   );
   const [productQty, setProductQty] = useState(1);
-  const { dispatch } = useCart();
 
-  const addToCartHandler = async () => {
-    const payload = {
-      quantity: productQty,
-      product_variant: {
-        product: {
-          image_url: product.image_url,
-          price: product.price,
-          name: product.name,
-          description: product.description,
-          id: product.id,
-          collection: product.collection,
-        },
-        varient: selectedVariant.variant,
-        id: Math.random(),
-        stock: selectedVariant.stock,
-      },
-    };
-
-    dispatch({
-      type: "ADD_ITEM",
-      payload,
-    });
-  };
-
-  const buyNowHandler = () => {
-    console.log("Buy Now");
-  };
+  /**
+   * TODO:
+   *   - Create an "Add to Cart" button
+   *   - Add an onClick handler for adding items to the cart
+   */
 
   return (
     <ProductContainer>
@@ -67,12 +42,8 @@ const ProductCard = ({ product }) => {
               setSelectedVariant={setSelectedVariant}
             />
 
+            {/* Add to cart button */}
             <ProductQuantityInput value={productQty} setValue={setProductQty} />
-
-            <ProductActionButtons
-              onAddToCart={addToCartHandler}
-              onBuyNow={buyNowHandler}
-            />
           </ProductDetailsContainer>
         </Column>
       </Row>

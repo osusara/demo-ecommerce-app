@@ -15,9 +15,6 @@ const cartReducer = (state, action) => {
     case "ADD_ITEM":
       return addItem(state, action.payload);
 
-    case "ADD_ITEMS":
-      return addItems(action.payload);
-
     case "REMOVE_ALL":
       return initialState;
 
@@ -54,25 +51,6 @@ const addItem = (currentState, payload) => {
   return {
     ...currentState,
     items: updatedItems,
-    totalAmount: newTotalAmount,
-    deliveryFee: newDeliveryFee,
-    discountPercentage: newDiscountPercentage,
-  };
-};
-
-const addItems = (payload) => {
-  let newTotalAmount = 0;
-  payload.items.forEach(
-    (item) =>
-      (newTotalAmount = item.product_variant.product.price * item.quantity)
-  );
-
-  const newDeliveryFee = newTotalAmount / 10;
-  const newDiscountPercentage = newTotalAmount > 500 ? 5 : 0;
-
-  return {
-    id: payload.id,
-    items: payload.items,
     totalAmount: newTotalAmount,
     deliveryFee: newDeliveryFee,
     discountPercentage: newDiscountPercentage,
