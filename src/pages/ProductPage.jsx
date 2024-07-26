@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/Product/ProductCard";
+import { API_URL } from "../../constants";
 
 function ProductPage() {
   const [product, setProduct] = useState();
@@ -9,9 +10,7 @@ function ProductPage() {
   useEffect(() => {
     async function fetchProductById() {
       try {
-        const response = await fetch(
-          `http://ec2-3-140-126-49.us-east-2.compute.amazonaws.com/product/${productId}/`
-        );
+        const response = await fetch(`${API_URL}/product/${productId}/`);
 
         if (!response.ok)
           throw new Error(`Error in fetching product ${productId}`);

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { color } from "../../theme";
 import { HighlightedText, SectionHeading } from "../common/Text";
 import ProductCard from "./ProductCard";
+import { API_URL } from "../../../constants";
 
 const TabHeaders = styled.nav`
   width: 100%;
@@ -52,7 +53,7 @@ const ProductCategoryTab = ({ collection }) => {
     async function fetchProductsByCategory() {
       try {
         const response = await fetch(
-          `http://ec2-3-140-126-49.us-east-2.compute.amazonaws.com/product/?collection_id=${collection.id}`,
+          `${API_URL}/product/?collection_id=${collection.id}`,
           { cache: "force-cache" }
         );
 
@@ -90,7 +91,7 @@ const ProductCategories = () => {
     async function fetchCollections() {
       try {
         const response = await fetch(
-          "http://ec2-3-140-126-49.us-east-2.compute.amazonaws.com/collection/"
+          `${API_URL}/collection/`
         );
 
         if (!response.ok) throw new Error("Error in fetching categories");
