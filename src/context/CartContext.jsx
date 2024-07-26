@@ -1,7 +1,5 @@
 import { createContext, useReducer } from "react";
 
-export const CartContext = createContext();
-
 const initialState = {
   id: undefined,
   items: [],
@@ -9,6 +7,8 @@ const initialState = {
   deliveryFee: 0,
   discountPercentage: 0,
 };
+
+export const CartContext = createContext(initialState);
 
 const cartReducer = (state, action) => {
   switch (action.type) {
@@ -30,14 +30,26 @@ const cartReducer = (state, action) => {
 };
 
 const addItem = (currentState, payload) => {
-  const updatedItems = [...currentState.items, payload];
+  const updatedItems = [...currentState.items];
+
+  const existingItemIndex = updatedItems.findIndex(
+    (item) =>
+      item.productId === payload.productId &&
+      item.product_variant.variant === payload.product_variant.variant
+  );
+
+  if (existingItemIndex !== -1) {
+    updatedItems[existingItemIndex].quantity += payload.quantity;
+  } else {
+    updatedItems.push(payload);
+  }
 
   const newTotalAmount =
     currentState.totalAmount +
     payload.product_variant.product.price * payload.quantity;
 
   const newDeliveryFee = newTotalAmount / 10;
-  const newDiscountPercentage = newTotalAmount > 500 ? 5 : 0
+  const newDiscountPercentage = newTotalAmount > 500 ? 5 : 0;
 
   return {
     ...currentState,
@@ -65,11 +77,10 @@ const addItems = (payload) => {
     deliveryFee: newDeliveryFee,
     discountPercentage: newDiscountPercentage,
   };
-}
+};
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
-  console.log(state)
 
   return (
     <CartContext.Provider value={{ state, dispatch }}>

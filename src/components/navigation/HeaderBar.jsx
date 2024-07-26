@@ -4,7 +4,13 @@ import logo from "/logo.svg";
 import NavigationItems from "./NavigationItems";
 
 function HeaderBar({ openCart }) {
-  const { state } = useCart()
+  const { state } = useCart();
+
+  const cartItemCount = state.items.reduce(
+    (acc, item) => acc + item.quantity,
+    0
+  );
+
   return (
     <Container>
       <Logo src={logo} alt="logo" />
@@ -12,7 +18,7 @@ function HeaderBar({ openCart }) {
       <CartButton onClick={openCart}>
         <IconWrapper>
           <i className="fa-solid fa-shopping-cart"></i>
-          <Badge>{state.items.length}</Badge>
+          <Badge>{cartItemCount}</Badge>
         </IconWrapper>
       </CartButton>
     </Container>
@@ -38,7 +44,7 @@ const CartButton = styled.span`
 const IconWrapper = styled.div`
   position: relative;
   display: inline-block;
-  font-size: 28px
+  font-size: 28px;
 `;
 
 const Badge = styled.span`

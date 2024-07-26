@@ -19,7 +19,7 @@ const CartItem = ({ item }) => {
               <b>{item.product_variant.product.name}</b>
             </Paragraph>
             <small>
-              {item.product_variant.varient} | Quantity : {item.quantity}
+              {item.product_variant.variant} | Quantity : {item.quantity}
             </small>
           </DetailsContainer>
         </Column>
