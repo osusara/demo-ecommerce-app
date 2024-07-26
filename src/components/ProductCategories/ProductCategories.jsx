@@ -52,7 +52,8 @@ const ProductCategoryTab = ({ collection }) => {
     async function fetchProductsByCategory() {
       try {
         const response = await fetch(
-          `http://ec2-3-140-126-49.us-east-2.compute.amazonaws.com/product/?collection_id=${collection.id}`
+          `http://ec2-3-140-126-49.us-east-2.compute.amazonaws.com/product/?collection_id=${collection.id}`,
+          { cache: "force-cache" }
         );
 
         if (!response.ok)
@@ -72,7 +73,7 @@ const ProductCategoryTab = ({ collection }) => {
   return (
     <TabContent>
       {!products.length && (
-        <NoContentMessage>No products in collection</NoContentMessage>
+        <NoContentMessage>No products in this collection</NoContentMessage>
       )}
       {products.map((product) => (
         <ProductCard product={product} key={product.id} />

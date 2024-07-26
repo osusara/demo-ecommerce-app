@@ -29,6 +29,8 @@ const ProductSizeSelector = ({
 
 const SmallButton = styled(Button)`
   width: auto;
+  min-width: 52px;
+  margin-right: 16px;
   height: 29px;
   padding: 2px 16px 2px 16px;
   border-radius: 6px;
