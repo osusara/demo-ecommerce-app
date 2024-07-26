@@ -10,6 +10,10 @@ const Container = styled(Column)`
   margin: 0 64px;
 `;
 
+const StyledMain = styled.main`
+  flex: 1;
+`;
+
 function PageLayout() {
   const [openCart, setOpenCart] = useState(false);
 
@@ -18,9 +22,9 @@ function PageLayout() {
       <header>
         <HeaderBar openCart={() => setOpenCart(true)} />
       </header>
-      <main>
+      <StyledMain>
         <Outlet />
-      </main>
+      </StyledMain>
       <CartCard isOpen={openCart} setIsOpen={setOpenCart} />
       <Footer />
     </Container>
