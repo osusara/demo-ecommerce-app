@@ -4,6 +4,7 @@ import ProductCard from "../components/Product/ProductCard";
 import { API_URL } from "../../constants";
 
 function ProductPage() {
+  const [error, setError] = useState("");
   const [product, setProduct] = useState();
   const { productId } = useParams();
 
@@ -18,12 +19,15 @@ function ProductPage() {
         const product = await response.json();
         setProduct(product);
       } catch (error) {
+        setError("Could not load the product");
         console.log(error);
       }
     }
 
     fetchProductById();
   }, [productId]);
+
+  if (error) return <p>Failed to load the product</p>;
 
   return product ? <ProductCard product={product} /> : <p>Loading...</p>;
 }
