@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
     product.product_variant[0]
   );
   const [productQty, setProductQty] = useState(1);
-  const { state, dispatch } = useCart();
+  const { dispatch } = useCart();
 
   const addToCartHandler = async () => {
     const payload = {
@@ -33,33 +33,10 @@ const ProductCard = ({ product }) => {
       },
     };
 
-    try {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/user/${1}/cart/${state.id}/add`,
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      if (!response.ok) throw new Error("Error in adding item to cart");
-
-      dispatch({
-        type: "ADD_ITEM",
-        payload,
-      });
-    } catch (error) {
-      console.log(error);
-
-      // Todo: need to remove
-      dispatch({
-        type: "ADD_ITEM",
-        payload,
-      });
-    }
+    dispatch({
+      type: "ADD_ITEM",
+      payload,
+    });
   };
 
   const buyNowHandler = () => {
